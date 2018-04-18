@@ -11,6 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+    'as' => 'home',
+    'uses' => 'MoviesController@index'
+]);
+
+Route::get('toprated', [
+    'as' => 'toprated',
+    'uses' => 'MoviesController@toprated'
+]);
+
+Route::get('search', [
+    'as' => 'search',
+    'uses' => 'MoviesController@search'
+]);
