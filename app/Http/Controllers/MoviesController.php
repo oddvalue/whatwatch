@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -28,7 +28,7 @@ class MoviesController extends Controller
      */
     public function upcoming(Request $request, MovieRepository $repo)
     {
-        $movies = $repo->upcoming($request->get('page'));
+        $movies = [];//$repo->upcoming($request->get('page'));
         return view('movies', compact('movies'));
     }
 
@@ -40,7 +40,7 @@ class MoviesController extends Controller
      */
     public function topRated(Request $request, MovieRepository $repo)
     {
-        $movies = $repo->topRated($request->get('page'));
+        $movies = [];//$repo->topRated($request->get('page'));
         return view('movies', compact('movies'));
     }
 

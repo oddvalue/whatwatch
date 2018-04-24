@@ -1,7 +1,21 @@
 @extends('layouts.default')
 
 @section('main')
-	<div class="poster-list">
+	{{-- <header>
+		<a href="{{ route('home') }}">WHAT WATCH?</a>
+		<nav>
+			<a href="{{ route('home') }}" class="{{ url()->current() == route('home') ? 'is-active' : '' }}">U<small>PCOMING</small></a>
+			<a href="{{ route('toprated') }}" class="{{ url()->current() == route('toprated') ? 'is-active' : '' }}">T<small>OP</small>R<small>ATED</small></a>
+		</nav>
+		<form action="{{ route('search') }}">
+			<input name="q" placeholder="search..." value="{{ old('q') }}">
+		</form>
+	</header> --}}
+
+	<div id="app">
+		<example-component></example-component>
+	</div>
+	{{-- <div class="poster-list">
 		@foreach ($movies as $movie)
 
 		<div class="poster">
@@ -12,10 +26,9 @@
 					<br>
 					<small>( {{ $movie->year }} )</small>
 				</p>
-				{{-- <a class="tooltip" title="{{ $movie->synopsis }}">overview</a> --}}
 			</div>
 		</div>
 		@endforeach
-	</div>
-	{{ $movies->links() }}
+	</div> --}}
+	{{-- {{ $movies->links() }} --}}
 @stop

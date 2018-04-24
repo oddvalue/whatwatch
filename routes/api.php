@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Resources\Movies;
+use App\Movies\MovieRepository;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,10 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+
+Route::get('/', function(Request $request, MovieRepository $repo) {
+    $movies = $repo->upcoming($request->get('page'));
+    return new Movies($movies);
 });

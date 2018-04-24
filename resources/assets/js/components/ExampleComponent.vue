@@ -15,9 +15,11 @@
 </template>
 
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
+export default {
+    mounted() {
+        window.axios.get('api').then(response => {
+            console.log(response.data.data); // do not commit
+        });
     }
+};
 </script>
