@@ -1,11 +1,15 @@
 <template>
-  <div class="container">
-    <ul>
-      <li>
-        <v-link href="/">Home</v-link>
-        <v-link href="/about">About</v-link>
-      </li>
-    </ul>
+  <div>
+    <header>
+      <v-link href="/">WHAT WATCH?</v-link>
+      <nav>
+        <a href="/">U<small>PCOMING</small></a>
+        <a href="/top-rated">T<small>OP</small>R<small>ATED</small></a>
+      </nav>
+      <form action="/search">
+        <input name="q" placeholder="search...">
+      </form>
+    </header>
 
     <slot></slot>
   </div>
@@ -21,10 +25,4 @@
 </script>
 
 <style scoped>
-  .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 15px 30px;
-    background: #f9f7f5;
-  }
 </style>

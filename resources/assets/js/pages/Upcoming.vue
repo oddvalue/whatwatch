@@ -1,28 +1,28 @@
 <template>
-    <div>
     <main-layout>
-        <v-poster v-for:="movies"></v-poster>
+        <v-poster-list :posters="movies"></v-poster-list>
     </main-layout>
-    </div>
 </template>
- 
+
 <script>
-import MainLayout from '../layouts/Main.vue'
-import VPoster from '../components/VPoster.vue'
- 
+import MainLayout from '../layouts/Main.vue';
+import VPosterList from '../components/VPosterList.vue';
+
 export default {
     components: {
         MainLayout,
-        VPoster
+        VPosterList
     },
-    data: {
-        movies: [],
+    data() {
+        return {
+            movies: [],
+        };
     },
     mounted() {
         window.axios.get('api').then(response => {
             this.movies = response.data.data;
         });
     }
-}
+};
 
 </script>
