@@ -11,17 +11,16 @@
 |
 */
 
-Route::get('/', [
-    'as' => 'home',
-    'uses' => 'MoviesController@index'
-]);
+Route::get('{path}', function() {
+    return view('app');
+})->where('path', '.*');
 
-Route::get('toprated', [
-    'as' => 'toprated',
-    'uses' => 'MoviesController@toprated'
-]);
+// Route::get('toprated', [
+//     'as' => 'toprated',
+//     'uses' => 'MoviesController@toprated'
+// ]);
 
-Route::get('search', [
-    'as' => 'search',
-    'uses' => 'MoviesController@search'
-]);
+// Route::get('search', [
+//     'as' => 'search',
+//     'uses' => 'MoviesController@search'
+// ]);
