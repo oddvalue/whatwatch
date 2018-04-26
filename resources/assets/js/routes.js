@@ -1,4 +1,5 @@
 export default {
     '/': 'Upcoming',
-    '/top-rated': 'TopRated'
+    '/top-rated': 'Upcoming',
+    '/search': 'Upcoming',
 }

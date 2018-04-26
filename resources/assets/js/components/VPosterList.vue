@@ -18,7 +18,7 @@ export default {
     },
     props: {
         posters: {
-            type: Object,
+            type: Array|Object,
             required: true
         },
     },

@@ -1,7 +1,7 @@
 <template>
   <a
     v-bind:href="href"
-    v-bind:class="{ active: isActive }"
+    v-bind:class="{ 'is-active': isActive, 'v-link': true }"
     v-on:click="go"
   >
     <slot></slot>
@@ -9,18 +9,23 @@
 </template>
 
 <script>
-  import routes from '../routes'
+  import routes from '../routes';
 
   export default {
     props: {
       href: {
         type:String,
         required: true
+      },
+      activeStyle: {
+        type: Boolean,
+        required: false,
+        default: true
       }
     },
     computed: {
       isActive () {
-        return this.href === this.$root.currentRoute
+        return this.activeStyle && this.href === this.$root.currentRoute
       }
     },
     methods: {
@@ -37,8 +42,11 @@
   }
 </script>
 
-<style scoped>
-  .active {
-    color: cornflowerblue;
+<style lang="scss" scoped>
+  .v-link {
+    display: inline-block;
+  }
+  .v-link.is-active {
+    border-bottom: .1em solid white;
   }
 </style>
