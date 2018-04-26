@@ -103,10 +103,11 @@ export default {
         margin: 0 auto 1em;
         animation: .3s ease-in-out both fade-in;
         position: relative;
+        font-size: 1em;
 
-        @media (max-width: 32em) {
+        @media (max-width: 34em) {
             margin: 0 1em 1em;
-            width: calc(100% - 2em);
+            width: calc(100% - 3.2em);
         }
     }
 
