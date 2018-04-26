@@ -103,6 +103,11 @@ export default {
         margin: 0 auto 1em;
         animation: .3s ease-in-out both fade-in;
         position: relative;
+
+        @media (max-width: 32em) {
+            margin: 0 1em 1em;
+            width: calc(100% - 2em);
+        }
     }
 
     @keyframes fade-in {

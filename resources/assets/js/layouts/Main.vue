@@ -3,6 +3,7 @@
         <header>
             <v-link href="/"
                     :activeStyle="false"
+                    className="logo"
             >WHAT WATCH?</v-link>
             <nav>
                 <v-link href="/">U<span>PCOMING</span></v-link>
@@ -54,6 +55,11 @@
 
     .body {
         position: relative;
+        padding-top: 5em;
+
+        @media (max-width: 480px) {
+            padding-top: 7em;
+        }
 
         &.is-loading {
             &:before {
@@ -96,33 +102,38 @@
         z-index: 1;
     }
 
-    a {
-        text-decoration: none;
-        color: white;
+    .logo {
         text-shadow: 0 0 2px white, 0 0 5px white;
-        font-family: 'Unica One', cursive;
-        font-size: 2em;
-        line-height: 1em;
 
         &:hover {
-            color: white;
             text-shadow: none;
         }
 
-        @media only screen and (max-device-width: 480px) {
+        @media (max-width: 480px) {
             width: 100%;
+            text-align: center;
+            margin-bottom: .5rem;
         }
+    }
+
+    a {
+        line-height: 1em;
+        color: white;
+        font-family: 'Unica One', cursive;
+        font-size: 2em;
     }
 
     nav {
         margin: 0 1em;
 
+        @media (max-width: 480px) {
+            margin: 0 1em 0 0;
+        }
+
         a {
             font-size: 1.5em;
-            text-shadow: none;
             padding: 0 .25em;
             margin: 0 .25em;
-            width: auto;
 
             span {
               font-size: .85em;

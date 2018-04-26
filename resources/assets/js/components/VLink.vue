@@ -21,11 +21,16 @@
                 type: Boolean,
                 required: false,
                 default: true
+            },
+            className: {
+                type: String,
+                required: false,
+                default: ''
             }
         },
         computed: {
             linkClass () {
-                const classes = [];
+                const classes = [this.className];
                 if (this.activeStyle) {
                     classes.push('has-active-style');
                 }
@@ -50,6 +55,9 @@
 </script>
 
 <style lang="scss" scoped>
+    a {
+        text-decoration: none;
+    }
     a.has-active-style {
         display: inline-block;
         transition: .3s;
