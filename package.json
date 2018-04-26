@@ -11,6 +11,7 @@
     },
     "devDependencies": {
         "axios": "^0.18",
+        "axios-cancel": "^0.2.2",
         "cross-env": "^5.1",
         "eslint": "^4.19.1",
         "eslint-plugin-vue": "^4.5.0",
@@ -19,8 +20,5 @@
         "popper.js": "^1.12",
         "vue": "^2.5.7",
         "vue-session": "^1.0.0"
-    },
-    "dependencies": {
-        "axios-cancel": "^0.2.2"
     }
 }
