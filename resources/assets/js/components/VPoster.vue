@@ -52,6 +52,7 @@
     .poster {
         position: relative;
         overflow: hidden;
+        color: white;
 
         &:before {
             content: '';

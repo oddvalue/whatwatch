@@ -2,6 +2,12 @@
     <main-layout @search="search"
                  :isLoading="isLoading"
     >
+        <input v-model="searchQuery"
+               placeholder="search..."
+               class="search"
+               @keyup="search"
+               ref="search"
+        >
         <v-poster-list :posters="movies"
                        v-if="movies.length"
         ></v-poster-list>
@@ -22,6 +28,7 @@ export default {
     data() {
         return {
             movies: [],
+            searchQuery: '',
             searchRequest: null,
             isLoading: false,
             isSearching: false,
@@ -29,11 +36,14 @@ export default {
             timeout: null,
         };
     },
+    mounted () {
+        this.$refs.search.focus();
+    },
     methods: {
-        search(searchQuery) {
+        search() {
             this.noResults = false;
 
-            if ( ! searchQuery) {
+            if ( ! this.searchQuery) {
                 this.isLoading = false;
                 this.isSearching = false;
                 this.movies = [];
@@ -49,8 +59,8 @@ export default {
                     axios.cancel(this.searchRequest);
                 }
                 this.searchRequest = (new Date).getTime();
-                window.axios.get('api/search', {
-                    params: {q: searchQuery},
+                axios.get('api/search', {
+                    params: {q: this.searchQuery},
                     requestId: this.searchRequest
                 }).then(response => {
                     this.movies = response.data.data;
@@ -70,9 +80,41 @@ export default {
 <style lang="scss" scoped>
     .message {
         position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 1.5em;
+        top: 48%;
+        left: 1em;
+        font-size: 2em;
+        font-weight: bold;
+        color: rgba(white, .5);
+        text-align: center;
+        width: calc(100% - 2em);
+        animation: .3s ease-in-out both fade-in;
+        animation-delay: .2s;
     }
+    .search {
+        max-width: 30em;
+        width: 100%;
+        display: block;
+        position: relative;
+        z-index: 1;
+        border: none;
+        box-shadow: inset 2px 2px 2px rgba(black, .5);
+        border-radius: 5px;
+        padding: .5em .6em;
+        margin: 0 auto 1em;
+        animation: .3s ease-in-out both fade-in;
+        position: relative;
+    }
+
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+            transform: translateY(1em);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+</style>
 </style>

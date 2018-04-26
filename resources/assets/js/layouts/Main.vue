@@ -8,12 +8,7 @@
                 <v-link href="/">U<span>PCOMING</span></v-link>
                 <v-link href="/top-rated">T<span>OP</span>R<span>ATED</span></v-link>
             </nav>
-            <input v-model="searchQuery"
-                   placeholder="search..."
-                   @focus="redirectToSearch"
-                   @keyup="search"
-                   ref="search"
-            >
+            <v-search-link href="/search"></v-search-link>
         </header>
 
         <slot></slot>
@@ -21,52 +16,28 @@
 </template>
 
 <script>
-  import VLink from '../components/VLink.vue';
-  import _ from "lodash";
+    import VLink from '../components/VLink.vue';
+    import VSearchLink from '../components/VSearchLink.vue';
+    import _ from "lodash";
 
-  export default {
-    props: {
-        isLoading: {
-            type: Boolean,
-            required: false,
-            default: false,
+    export default {
+        props: {
+            isLoading: {
+                type: Boolean,
+                required: false,
+                default: false,
+            },
+            initialSearchQuery: {
+                type: String,
+                required: false,
+                default: ''
+            }
         },
-        initialSearchQuery: {
-            type: String,
-            required: false,
-            default: ''
-        }
-    },
-    data() {
-        return {
-            searchQuery: '',
-        };
-    },
-    components: {
-        VLink
-    },
-    mounted() {
-        if (this.$session.get('focustSearch')) {
-            this.$refs.search.focus();
-            this.$session.set('focustSearch', false);
-        }
-    },
-    methods: {
-        redirectToSearch() {
-            this.$session.set('focustSearch', true);
-            this.$root.currentRoute = '/search';
-            window.history.pushState(
-                null,
-                'Search',
-                '/search'
-            );
+        components: {
+            VLink,
+            VSearchLink,
         },
-        search() {
-            this.$session.set('searchQuery', this.searchQuery);
-            this.$emit('search', this.searchQuery);
-        }
     }
-  }
 </script>
 
 <style lang="scss" scoped>
@@ -109,10 +80,11 @@
             }
         }
     }
-    header
-    {
+    header {
+        color: white;
         position: fixed;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
         background: rgba(black, .8);
@@ -122,55 +94,39 @@
         right: 0;
         padding: 1em;
         z-index: 1;
+    }
 
-        a
-        {
-            text-decoration: none;
+    a {
+        text-decoration: none;
+        color: white;
+        text-shadow: 0 0 2px white, 0 0 5px white;
+        font-family: 'Unica One', cursive;
+        font-size: 2em;
+        line-height: 1em;
+
+        &:hover {
             color: white;
-            text-shadow: 0 0 2px white, 0 0 5px white;
-            font-family: 'Unica One', cursive;
-            font-size: 2em;
-            line-height: 1em;
-
-            &:hover {
-                color: white;
-                text-shadow: none;
-            }
-
-            @media only screen and (max-device-width: 480px)
-            {
-                font-size: 1em;
-            }
-            @media (max-width: 480px)
-            {
-                font-size: 1em;
-            }
+            text-shadow: none;
         }
 
-        nav
-        {
-            margin: 0 1em;
-
-            a
-            {
-                font-size: 1.5em;
-                text-shadow: none;
-                padding: 0 .25em;
-                margin: 0 .25em;
-
-                span {
-                  font-size: .85em;
-                }
-            }
+        @media only screen and (max-device-width: 480px) {
+            width: 100%;
         }
+    }
 
-        input
-        {
-            width: 15em;
-            border: none;
-            box-shadow: inset 2px 2px 2px rgba(black, .5);
-            border-radius: 5px;
-            padding: .5em .6em;
+    nav {
+        margin: 0 1em;
+
+        a {
+            font-size: 1.5em;
+            text-shadow: none;
+            padding: 0 .25em;
+            margin: 0 .25em;
+            width: auto;
+
+            span {
+              font-size: .85em;
+            }
         }
     }
 </style>
