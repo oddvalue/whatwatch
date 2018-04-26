@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{'is-loading': isLoading, body: true}">
     <header>
       <v-link href="/"
               :activeStyle="false"
@@ -23,6 +23,13 @@
   import _ from "lodash";
 
   export default {
+    props: {
+        isLoading: {
+            type: Boolean,
+            required: false,
+            default: false,
+        }
+    },
     data() {
         return {
             searchQuery: ''
@@ -48,13 +55,37 @@
 </script>
 
 <style lang="scss" scoped>
+    .body {
+        position: relative;
+
+        &.is-loading {
+            &:before {
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background-color: rgba(black, .5);
+                content: '';
+            }
+            &:after {
+                position: fixed;
+                display: block;
+                top: calc(50% - 2em);
+                left: calc(50% - 2em);
+                width: 4em;
+                height: 4em;
+                content: 'LOADING...';
+            }
+        }
+    }
     header
     {
         position: fixed;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: rgba(0, 0, 0, .8);
+        background: rgba(black, .8);
         text-align: right;
         top: 0;
         left: 0;

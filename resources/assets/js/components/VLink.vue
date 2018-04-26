@@ -1,7 +1,7 @@
 <template>
   <a
     v-bind:href="href"
-    v-bind:class="{ 'is-active': isActive, 'v-link': true }"
+    v-bind:class="{ 'is-active': isActive }"
     v-on:click="go"
   >
     <slot></slot>
@@ -43,10 +43,10 @@
 </script>
 
 <style lang="scss" scoped>
-  .v-link {
+  a {
     display: inline-block;
   }
-  .v-link.is-active {
+  a.is-active {
     border-bottom: .1em solid white;
   }
 </style>
