@@ -5,11 +5,11 @@
               :activeStyle="false"
       >WHAT WATCH?</v-link>
       <nav>
-        <v-link href="/">U<small>PCOMING</small></v-link>
-        <v-link href="/top-rated">T<small>OP</small>R<small>ATED</small></v-link>
+        <v-link href="/">U<span>PCOMING</span></v-link>
+        <v-link href="/top-rated">T<span>OP</span>R<span>ATED</span></v-link>
       </nav>
-      <input v-model="searchQuery" 
-             placeholder="search..." 
+      <input v-model="searchQuery"
+             placeholder="search..."
              @keyup="search"
       >
     </header>
@@ -94,7 +94,12 @@
             {
                 font-size: 1.5em;
                 text-shadow: none;
-                padding: 0 .5em;
+                padding: 0 .25em;
+                margin: 0 .25em;
+
+                span {
+                  font-size: .85em;
+                }
             }
         }
 

@@ -1,7 +1,7 @@
 <template>
   <a
     v-bind:href="href"
-    v-bind:class="{ 'is-active': isActive, 'v-link': true }"
+    v-bind:class="linkClass"
     v-on:click="go"
   >
     <slot></slot>
@@ -24,8 +24,15 @@
       }
     },
     computed: {
-      isActive () {
-        return this.activeStyle && this.href === this.$root.currentRoute
+      linkClass () {
+        const classes = ['v-link'];
+        if (this.activeStyle) {
+          classes.push('has-active-style');
+        }
+        if (this.href === this.$root.currentRoute) {
+          classes.push('is-active');
+        }
+        return classes.join(' ');
       }
     },
     methods: {
@@ -45,8 +52,13 @@
 <style lang="scss" scoped>
   .v-link {
     display: inline-block;
+    transition: .3s;
+    border-bottom: .05em solid transparent;
   }
-  .v-link.is-active {
-    border-bottom: .1em solid white;
+  .v-link.has-active-style.is-active {
+    border-bottom: .05em solid rgba(white, .25);
+  }
+  .v-link.has-active-style:hover {
+    border-bottom: .05em solid white;
   }
 </style>

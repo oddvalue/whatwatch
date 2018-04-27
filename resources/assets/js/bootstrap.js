@@ -6,7 +6,7 @@
 
 import axios from 'axios';
 window.axios = axios;
-console.log(axios);
+
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
@@ -22,6 +22,17 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+/**
+ * Add helper method to axios to cancel requests
+ * @usage
+ *
+ */
+const cancelSource = window.axios.CancelToken.source();
+window.axios.cancelToken = cancelSource.token;
+window.axios.cancel = cancelMessage => {
+    cancelSource.cancel(cancelMessage);
+};
 
 /**
  *
