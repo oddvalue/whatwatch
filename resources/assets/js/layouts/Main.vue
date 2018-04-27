@@ -11,6 +11,7 @@
             <input v-model="searchQuery"
                    placeholder="search..."
                    @keyup="search"
+                   ref="search"
             >
         </header>
 
@@ -28,26 +29,38 @@
             type: Boolean,
             required: false,
             default: false,
+        },
+        initialSearchQuery: {
+            type: String,
+            required: false,
+            default: ''
         }
     },
     data() {
         return {
-            searchQuery: ''
+            searchQuery: '',
         };
     },
     components: {
       VLink
     },
+    mounted() {
+        if (this.searchQuery) {
+            this.$refs.search.focus();
+            this.search();
+        }
+    },
     methods: {
-        search(query) {
-            // if (this.searchQuery.length) {
-            //     this.$root.currentRoute = '/search';
-            //     window.history.pushState(
-            //       null,
-            //       'Search',
-            //       '/search'
-            //     );
-            // }
+        search() {
+            this.$session.set('searchQuery', this.searchQuery);
+            if (this.searchQuery && this.searchQuery.length && window.location.pathname !== '/search') {
+                this.$root.currentRoute = '/search';
+                window.history.pushState(
+                  null,
+                  'Search',
+                  '/search'
+                );
+            }
             this.$emit('search', this.searchQuery);
         }
     }

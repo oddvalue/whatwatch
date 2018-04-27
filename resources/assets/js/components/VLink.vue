@@ -1,8 +1,8 @@
 <template>
     <a
-        v-bind:href="href"
-        v-bind:class="linkClass"
-        v-on:click="go"
+        :href="href"
+        :class="linkClass"
+        @click="go"
     >
         <slot></slot>
     </a>

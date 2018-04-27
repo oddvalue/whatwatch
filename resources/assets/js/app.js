@@ -2,8 +2,10 @@
 
 import './bootstrap';
 import Vue from 'vue';
-
+import VueSession from 'vue-session';
 import routes from './routes';
+
+Vue.use(VueSession);
 
 const app = new Vue({
     el: '#app',

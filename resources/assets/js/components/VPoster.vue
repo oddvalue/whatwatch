@@ -49,22 +49,9 @@
 </script>
 
 <style lang="scss" scoped>
-    @keyframes fade-in {
-      0% {
-        opacity: 0;
-        transform: scale(0);
-      }
-
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
     .poster {
         position: relative;
         overflow: hidden;
-        transform: scale(0);
 
         &:before {
             content: '';
@@ -72,24 +59,35 @@
             padding-bottom: calc(741/500*100%);
         }
 
-        &.is-loaded {
-            animation: .3s ease-in-out both fade-in;
-        }
-
-        @for $i from 1 through 20 {
-            &:nth-child(#{$i}) {
-                // Delay the animation. Delay increases as items loop.
-                animation-delay: $i * (.03s);
+        &:not(.is-loaded) {
+            animation: 1s ease 0s pulse infinite;
+            @for $i from 1 through 20 {
+                &:nth-child(#{$i}) {
+                    animation-delay: $i * (1s / 18);
+                }
             }
         }
-        &:nth-child(n+20) {
-            animation-delay: 6s;
+
+        &.is-loaded {
+            .poster__image {
+                animation: .3s ease-in-out both grow-in;
+            }
+
+            @for $i from 1 through 20 {
+                &:nth-child(#{$i}) .poster__image {
+                    animation-delay: $i * (.03s);
+                }
+            }
+            &:nth-child(n+20) .poster__image {
+                animation-delay: .6s;
+            }
         }
     }
 
     .poster__image {
         width: 100%;
         position: absolute;
+        opacity: 0;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -102,5 +100,46 @@
         right: 0;
         padding: .5em;
         background-color: rgba(black, .5);
+        animation: .3s ease-in-out both fade-in;
+
+        @for $i from 1 through 20 {
+            &:nth-child(#{$i}) {
+                animation-delay: $i * (1s / 18);
+            }
+        }
+    }
+
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+    @keyframes grow-in {
+        0% {
+            opacity: 0;
+            width: 0;
+        }
+
+        100% {
+            opacity: 1;
+            width: 100%;
+        }
+    }
+    @keyframes pulse {
+        0% {
+            background: #262626;
+        }
+
+        25% {
+            background: lighten(#262626, 10%);
+        }
+
+        50% {
+            background: #262626;
+        }
     }
 </style>
