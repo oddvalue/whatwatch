@@ -50,12 +50,10 @@
 </script>
 
 <style lang="scss" scoped>
-  .v-link {
+  .v-link.has-active-style.is-active {
     display: inline-block;
     transition: .3s;
     border-bottom: .05em solid transparent;
-  }
-  .v-link.has-active-style.is-active {
     border-bottom: .05em solid rgba(white, .25);
   }
   .v-link.has-active-style:hover {

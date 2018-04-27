@@ -1,5 +1,7 @@
 <template>
-    <main-layout @search="search">
+    <main-layout @search="search"
+                 :isLoading="isLoading"
+    >
         <v-poster-list :posters="movies"></v-poster-list>
     </main-layout>
 </template>
@@ -31,11 +33,14 @@ export default {
                     this.searchRequest = null;
                 });
             }, 500),
+            isLoading: false
         };
     },
     mounted() {
-        window.axios.get('api').then(response => {
+        this.isLoading = true;
+        window.axios.get(this.getSource()).then(response => {
             this.movies = response.data.data;
+            this.isLoading = false;
         });
     },
     methods: {
@@ -46,9 +51,6 @@ export default {
 
                 case '/top-rated':
                     return 'api/top-rated';
-
-                case '/search':
-                    return 'api/search';
             }
         },
         search(searchQuery) {
