@@ -1,5 +1,7 @@
 <template>
     <img :src="src"
+         :width="width"
+         :height="height"
          @load="loaded"
          @error="error"
     >
@@ -11,6 +13,14 @@
             src: {
                 type: String,
                 required: true,
+            },
+            width: {
+                type: Number,
+                required: false
+            },
+            height: {
+                type: Number,
+                required: false
             }
         },
         methods: {

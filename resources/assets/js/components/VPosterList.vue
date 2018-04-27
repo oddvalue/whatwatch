@@ -1,10 +1,10 @@
 <template>
     <div class="poster-list">
         <v-poster v-for="(poster, key) in posters"
-                  v-bind:key="key"
-                  v-bind:title="poster.title"
-                  v-bind:year="poster.year"
-                  v-bind:poster="poster.poster"
+                  :key="key"
+                  :title="poster.title"
+                  :year="poster.year"
+                  :poster="poster.poster || ''"
         ></v-poster>
     </div>
 </template>

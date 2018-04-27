@@ -1,6 +1,6 @@
 <template>
     <div :class="{poster: true, 'is-loaded': isLoaded}">
-        <v-image class="poster__image" 
+        <v-image class="poster__image"
                  :src="poster"
                  @loaded="loaded"
         ></v-image>
@@ -24,7 +24,7 @@
         props: {
             poster: {
                 type:String,
-                required: true
+                required: false
             },
             title: {
                 type:String,
@@ -42,7 +42,6 @@
         },
         methods: {
             loaded () {
-                console.log('loaded');
                 this.isLoaded = true;
             }
         }
@@ -55,7 +54,7 @@
         opacity: 0;
         transform: scale(0);
       }
-      
+
       100% {
         opacity: 1;
         transform: scale(1);
@@ -75,6 +74,16 @@
 
         &.is-loaded {
             animation: .3s ease-in-out both fade-in;
+        }
+
+        @for $i from 1 through 20 {
+            &:nth-child(#{$i}) {
+                // Delay the animation. Delay increases as items loop.
+                animation-delay: $i * (.03s);
+            }
+        }
+        &:nth-child(n+20) {
+            animation-delay: 6s;
         }
     }
 

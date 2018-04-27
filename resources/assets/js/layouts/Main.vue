@@ -1,21 +1,21 @@
 <template>
-  <div :class="{'is-loading': isLoading, body: true}">
-    <header>
-      <v-link href="/"
-              :activeStyle="false"
-      >WHAT WATCH?</v-link>
-      <nav>
-        <v-link href="/">U<span>PCOMING</span></v-link>
-        <v-link href="/top-rated">T<span>OP</span>R<span>ATED</span></v-link>
-      </nav>
-      <input v-model="searchQuery"
-             placeholder="search..."
-             @keyup="search"
-      >
-    </header>
+    <div :class="{'is-loading': isLoading, body: true}">
+        <header>
+            <v-link href="/"
+                    :activeStyle="false"
+            >WHAT WATCH?</v-link>
+            <nav>
+                <v-link href="/">U<span>PCOMING</span></v-link>
+                <v-link href="/top-rated">T<span>OP</span>R<span>ATED</span></v-link>
+            </nav>
+            <input v-model="searchQuery"
+                   placeholder="search..."
+                   @keyup="search"
+            >
+        </header>
 
-    <slot></slot>
-  </div>
+        <slot></slot>
+    </div>
 </template>
 
 <script>
@@ -55,6 +55,17 @@
 </script>
 
 <style lang="scss" scoped>
+    @keyframes rotate {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
     .body {
         position: relative;
 
@@ -75,7 +86,11 @@
                 left: calc(50% - 2em);
                 width: 4em;
                 height: 4em;
-                content: 'LOADING...';
+                content: '';
+                border-radius: 50%;
+                border: 5px solid rgba(white, .2);
+                border-left: 5px solid white;
+                animation: rotate 1.1s infinite linear;
             }
         }
     }
