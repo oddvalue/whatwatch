@@ -1,56 +1,52 @@
-<?php 
+<?php
 
 namespace App\Movies;
 
-class TmbdMovieTransformer implements MovieTransformerInterface
+class TmbdMovieTransformer extends Movie implements MovieTransformerInterface
 {
+    private $original;
+
     /**
      * @param  $original
      * @return App\Movies\Movie
      */
-    public function transform($original)
+    public function __construct($original)
     {
-        return new Movie([
-            'title' => $this->getTitle($original),
-            'synopsis' => $this->getSynopsis($original),
-            'year' => $this->getYear($original),
-            'poster' => $this->getPosterUrl($original),
-        ]);
+        $this->original = $original;
     }
 
     /**
-     * @param  $original
      * @return string
      */
-    public function getTitle($original)
+    public function getTitle()
     {
-        return $original->getTitle();
+        return $this->original->getTitle();
     }
 
     /**
-     * @param  $original
      * @return string
      */
-    public function getSynopsis($original)
+    public function getSynopsis()
     {
-        return $original->getOverview();
+        return $this->original->getOverview();
     }
 
     /**
-     * @param  $original
      * @return string
      */
-    public function getYear($original)
+    public function getYear()
     {
-        return $original->getReleaseDate()->format('Y');
+        return $this->original->getReleaseDate()->format('Y');
     }
 
     /**
-     * @param  $original
      * @return string
      */
-    public function getPosterUrl($original)
+    public function getPosterUrl()
     {
-        return "https://image.tmdb.org/t/p/w500{$original->getPosterPath()}";
+        if ( ! $this->original->getPosterPath()) {
+            return asset('images/no-image.png');
+        }
+        return "https://image.tmdb.org/t/p/w500{$this->original->getPosterPath()}";
     }
 }

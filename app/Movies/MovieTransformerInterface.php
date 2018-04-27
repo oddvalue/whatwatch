@@ -1,36 +1,31 @@
-<?php 
+<?php
 
 namespace App\Movies;
 
 interface MovieTransformerInterface
 {
     /**
-     * @param  $original
-     * @return App\Movies\Movie
+     * @param mixed $original
      */
-    public function transform($original);
-    
-    /**
-     * @param  $original
-     * @return string
-     */
-    public function getTitle($original);
+    public function __construct($original);
 
     /**
-     * @param  $original
      * @return string
      */
-    public function getSynopsis($original);
+    public function getTitle();
 
     /**
-     * @param  $original
      * @return string
      */
-    public function getYear($original);
+    public function getSynopsis();
 
     /**
-     * @param  $original
      * @return string
      */
-    public function getPosterUrl($original);
+    public function getYear();
+
+    /**
+     * @return string
+     */
+    public function getPosterUrl();
 }
