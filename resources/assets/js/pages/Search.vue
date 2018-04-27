@@ -26,7 +26,6 @@ export default {
         };
     },
     mounted() {
-        console.log('search'); // do not commit
         if ( ! this.$session.get('searchQuery')) {
             this.$root.currentRoute = '/'
             window.history.replaceState(

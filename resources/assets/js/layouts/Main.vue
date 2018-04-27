@@ -10,6 +10,7 @@
             </nav>
             <input v-model="searchQuery"
                    placeholder="search..."
+                   @focus="redirectToSearch"
                    @keyup="search"
                    ref="search"
             >
@@ -42,25 +43,26 @@
         };
     },
     components: {
-      VLink
+        VLink
     },
     mounted() {
-        if (this.searchQuery) {
+        if (this.$session.get('focustSearch')) {
             this.$refs.search.focus();
-            this.search();
+            this.$session.set('focustSearch', false);
         }
     },
     methods: {
+        redirectToSearch() {
+            this.$session.set('focustSearch', true);
+            this.$root.currentRoute = '/search';
+            window.history.pushState(
+                null,
+                'Search',
+                '/search'
+            );
+        },
         search() {
             this.$session.set('searchQuery', this.searchQuery);
-            if (this.searchQuery && this.searchQuery.length && window.location.pathname !== '/search') {
-                this.$root.currentRoute = '/search';
-                window.history.pushState(
-                  null,
-                  'Search',
-                  '/search'
-                );
-            }
             this.$emit('search', this.searchQuery);
         }
     }
