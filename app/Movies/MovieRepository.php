@@ -2,9 +2,10 @@
 
 namespace App\Movies;
 
-use Illuminate\Pagination\LengthAwarePaginator;
-use Tmdb\ApiToken;
 use Tmdb\Client;
+use Tmdb\ApiToken;
+use App\Movies\Movie;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Tmdb\Repository\MovieRepository as TmdbRepository;
 
 class MovieRepository
@@ -15,19 +16,11 @@ class MovieRepository
      */
     private $tmdbRepo;
 
-    /**
-     * App\Movies\TmbdMovieTransformer
-     * @access private
-     */
-    private $transformer;
-
     function __construct()
     {
         $token  = new ApiToken(config('movies.tmdb_api_key'));
         $client = new Client($token);
         $this->tmdbRepo = new TmdbRepository($client);
-
-        $this->transformer = new TmbdMovieTransformer;
     }
 
     /**
@@ -58,7 +51,7 @@ class MovieRepository
     protected function paginate($result, $page)
     {
         return new LengthAwarePaginator(collect($result->map(function($kwy, $movie) {
-            return $this->transformer->transform($movie);
+            return new Movie(new TmbdMovieTransformer($movie));
         })->toArray())->values(), $result->getTotalPages(), 20, $page, ['path' => request()->path(), 'query' => request()->input()]);
     }
 }
